@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-16">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="in&amp;utmatning"/>
+	<classpathentry kind="src" path="variabler"/>
+	<classpathentry kind="src" path="Uppgifter"/>
+	<classpathentry kind="src" path="kontrollsatser"/>
+	<classpathentry kind="src" path="matte"/>
+	<classpathentry kind="src" path="inluppa"/>
+	<classpathentry kind="src" path="metoder&amp;funktioner"/>
+	<classpathentry kind="src" path="trycatch"/>
+	<classpathentry kind="src" path="GUI"/>
+	<classpathentry kind="src" path="Objekt"/>
+	<classpathentry kind="src" path="sort&amp;sok"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
