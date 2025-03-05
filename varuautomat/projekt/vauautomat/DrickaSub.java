@@ -19,7 +19,7 @@ public class DrickaSub extends AbsVaror{
 		
 	}
 	@Override
-	public String toString() { 
+	public String toString() { //möjlig förändring kan anända system.out.println på alla sitället för att ändra tostring
 		return "Sort: " + getSort() + "  Typ: " + typ + "  Pris: " + pris + "  Moms: " + moms;
 	}
 }
