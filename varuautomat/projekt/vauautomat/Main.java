@@ -10,6 +10,7 @@ public class Main {
 		
 		utrymme.addVara(cola);
 		
+		utrymme.printVaror();
 
 	}
 

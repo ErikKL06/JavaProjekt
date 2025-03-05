@@ -9,9 +9,17 @@ public class DrickaSub extends AbsVaror{
 		this.sort = sort;
 	}
 	
+	public String getSort() {
+		return sort;
+	}
+	
 	@Override
 	public void print() {
 		System.out.println(typ);
 		
+	}
+	@Override
+	public String toString() { 
+		return "Sort: " + getSort() + "  Typ: " + typ + "  Pris: " + pris + "  Moms: " + moms;
 	}
 }

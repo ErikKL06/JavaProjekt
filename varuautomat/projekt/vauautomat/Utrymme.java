@@ -14,9 +14,9 @@ public class Utrymme {
 		varor.add(vara);
 	}
 	
-	public void printVaror() {
+	public void printVaror() {  //möjligt förändrningsbar
 		for (AbsVaror vara : varor) {
-			System.out.println(vara.getTyp() + " " + vara.getPris() + "kr " + vara.getMoms() + "%");
+			System.out.println(vara.toString());
 		}
 	}
 }

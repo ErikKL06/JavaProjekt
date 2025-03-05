@@ -26,6 +26,11 @@ public abstract class AbsVaror {
 	
 	//abstrakt metod, ej färdig , måste komppleteras i subclassen
 	public abstract void print();
+	
+	@Override
+	public String toString() { //möjligt förändrningsbar
+		return "Typ: " + typ + " Pris: " + pris + " Moms: " + moms;
+	}
 
 	
 }
