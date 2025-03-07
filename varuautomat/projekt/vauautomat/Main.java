@@ -28,8 +28,6 @@ public class Main {
 		utrymme.addVara(TGH);
 		
 		utrymme.printVaror();
-		FileManagement.createFile(utrymme.getVaror());
-		System.out.print(utrymme.getVaror());
 
 	}
 
