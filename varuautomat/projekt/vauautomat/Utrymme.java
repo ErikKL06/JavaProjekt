@@ -13,7 +13,10 @@ public class Utrymme {
 	public void addVara(AbsVaror vara) {
 		varor.add(vara);
 	}
-	
+
+	public String getVaror() {
+		return varor.toString();
+	}
 	public void printVaror() {  //möjligt förändrningsbar
 		for (AbsVaror vara : varor) {
 			System.out.println(vara.toString());
