@@ -15,7 +15,7 @@ public class DrickaSub extends AbsVaror {
 
 	@Override
 	public void print() {
-		System.out.println(typ);
+		System.out.println(typ + getPris());
 
 	}
 

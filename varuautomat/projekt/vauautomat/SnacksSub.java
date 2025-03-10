@@ -8,14 +8,14 @@ public class SnacksSub extends AbsVaror {
 		super("Snack", 10, 12, 10);
 		this.sort = sort;
 	}
-
+	@Override
 	public String getSort() {
 		return sort;
 	}
 
 	@Override
 	public void print() {
-		System.out.println(typ);
+		System.out.println(typ + getPris());
 
 	}
 

@@ -12,9 +12,28 @@ public class Utrymme {
 	public void addVara(AbsVaror vara) {
 		varor.add(vara);
 	}
+	public void createDefaultData() {
+		DrickaSub cola = new DrickaSub("Coca Cola");
+		addVara(cola);
+		DrickaSub orange = new DrickaSub("Orange");
+		addVara(orange);
+		DrickaSub lime = new DrickaSub("Lime");
+		addVara(lime);
 
-	public String getVaror() {
-		return varor.toString();
+		SnacksSub chips = new SnacksSub("Chips");
+		addVara(chips);
+		SnacksSub nuts = new SnacksSub("Nuts");
+		addVara(nuts);
+		SnacksSub Gum = new SnacksSub("Gum");
+		addVara(Gum);
+
+		PocketbokSub SoT = new PocketbokSub("Sea of Tranquility");
+		addVara(SoT);
+		PocketbokSub SE = new PocketbokSub("Station elven");
+		addVara(SE);
+		PocketbokSub TGH = new PocketbokSub("The glass hotel");
+		addVara(TGH);
+		System.out.println("skapat");
 	}
 
 	public void printVaror() { // möjligt förändrningsbar
@@ -22,4 +41,5 @@ public class Utrymme {
 			System.out.println(vara.toString());
 		}
 	}
+
 }

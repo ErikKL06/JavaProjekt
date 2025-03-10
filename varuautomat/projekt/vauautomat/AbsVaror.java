@@ -17,10 +17,17 @@ public abstract class AbsVaror implements Serializable {
 		this.moms = moms;
 		this.antal = antal;
 	}
+	public void reduceraAntal(){
+		antal--;
+	}
+	public void ökaAntal(){
+		antal++;
+	}
 
 	public String getTyp() {
 		return typ;
 	}
+	public abstract String getSort();
 
 	public int getPris() {
 		return pris;

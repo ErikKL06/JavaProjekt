@@ -1,6 +1,6 @@
 package vauautomat;
 
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -19,14 +19,15 @@ import javax.swing.JTextField;
 
 public class gui extends JFrame {
 
+	private ArrayList<JButton> buttons = new ArrayList<>();
+
 	// Window dimensions
-	private final int SIZEX = 400;
-	private final int SIZEY = 400;
+	private final int SIZEX = 500;
+	private final int SIZEY = 500;
 
 	// UI Components
 	private JPanel startPanel, instPanel;
-	private JButton btnAlt1, btnAlt2, btnAlt3, btnSettings;
-	private JTextField txtIn;
+	private JButton btnAlt9;
 	private Utrymme utrymme; // Add this line
 
 	// Modify constructor to accept Utrymme object
@@ -46,55 +47,53 @@ public class gui extends JFrame {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				System.out.println("Opening window...");
-				load();
+
 			}
+
+
 		});
+		if(load() == false){ //måste köra utanför opening windows eftersom annars kommer den inte hinna ladda in innan initcomponenets
+			utrymme.createDefaultData();
+		}
+		utrymme.printVaror();
 
 		setSize(SIZEX, SIZEY); // Window size
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ensure app exits properly
 		startPanel = new JPanel();
-
 		initComponents();
 		startView();
 
 		setVisible(true); // Set visible at the end
 	}
 
-	private void initComponents() {
-		btnAlt1 = new JButton("Click me!");
-		btnAlt1.addActionListener(e -> System.out.println("Button 1 clicked"));
+	private void initComponents() { //möjlig förbättreign: skippa att lägga btn i arraylist
 
-		btnAlt2 = new JButton("Open me");
-		btnAlt2.addActionListener(e -> System.out.println("Button 2 clicked"));
 
-		btnAlt3 = new JButton("Alt 3");
-		btnAlt3.addActionListener(e -> System.out.println("Button 3 clicked"));
+		for (AbsVaror vara : utrymme.varor) {
+			JButton btn = new JButton(vara.getSort()+": " + vara.getAntal());
+			btn.addActionListener(e -> { //arrow funktion
+				vara.reduceraAntal(); //callar funktionen som är ärvd av absvaror
+				btn.setText(vara.getSort()+": " + vara.getAntal()); //updaterar gui
+				if(vara.getAntal() == 0){btn.setEnabled(false);} //sänger av knappen om den är tom
 
-		btnSettings = new JButton("Settings");
-		btnSettings.addActionListener(e -> settings());
+			});
+			if(vara.getTyp().equals("Dricka")) {btn.setBackground(Color.yellow);}
+			if(vara.getTyp().equals("Snacks")) {btn.setBackground(Color.LIGHT_GRAY);}
+			if(vara.getTyp().equals("Pocketbok")) {btn.setBackground(Color.pink);}
+			if(vara.getAntal() <= 0){btn.setEnabled(false);} //sänger av knappen om den är tom
+			buttons.add(btn); // Save the buttons
+		}
 
-		txtIn = new JTextField();
 	}
 
 	private void startView() {
-		startPanel.setLayout(new GridLayout(2, 2));
-		startPanel.add(btnAlt1);
-		startPanel.add(btnAlt2);
-		startPanel.add(btnAlt3);
-		startPanel.add(btnSettings);
+		startPanel.setLayout(new GridLayout(3, 3));
+		for (JButton btn : buttons) {
+			startPanel.add(btn);
+		}
 
 		setContentPane(startPanel);
 		validate();
-	}
-
-	private void settings() {
-		getContentPane().removeAll();
-		instPanel = new JPanel(new GridLayout(2, 1));
-		instPanel.add(txtIn);
-
-		setContentPane(instPanel);
-		validate();
-		repaint();
 	}
 
 	private void save() {
@@ -111,7 +110,7 @@ public class gui extends JFrame {
 		}
 	}
 
-	private void load() {
+	public boolean load() {
 		try {
 
 			ObjectInputStream infil = new ObjectInputStream(new FileInputStream(new File("objekt.txt")));
@@ -119,10 +118,12 @@ public class gui extends JFrame {
 			utrymme.varor = (ArrayList<AbsVaror>) infil.readObject();
 			infil.close();
 			System.out.println("laddar in objekt");
+			return true;
 
-		} catch (ClassNotFoundException | IOException ex2) {
-			ex2.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Error: Failed to read file");
+		} catch(Exception e) {
+			System.out.println("Filen finns ej");
+			return false;
+
 		}
 
 	}
