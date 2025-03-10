@@ -92,7 +92,7 @@ public class gui extends JFrame {
 	private void save() {
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("objekt.dat"))) {
 			// Save an actual object here instead of a class
-			out.writeObject(Utrymme.class);
+			out.writeObject("utrymme");
 			System.out.println("Data saved successfully.");
 		} catch (IOException e) {
 			e.printStackTrace();
