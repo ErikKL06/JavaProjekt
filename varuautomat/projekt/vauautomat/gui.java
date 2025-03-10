@@ -27,12 +27,11 @@ public class gui extends JFrame {
 
 	// UI Components
 	private JPanel startPanel, instPanel;
-	private JButton btnAlt9;
-	private Utrymme utrymme; // Add this line
+	private Utrymme utrymmet; // Add this line
 
 	// Modify constructor to accept Utrymme object
-	public gui(Utrymme utrymme) {
-		this.utrymme = utrymme; // Assign the passed object
+	public gui(Utrymme utrymmet) {
+		this.utrymmet = utrymmet; // Assign the passed object
 		// Window close event
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -53,9 +52,9 @@ public class gui extends JFrame {
 
 		});
 		if(load() == false){ //måste köra utanför opening windows eftersom annars kommer den inte hinna ladda in innan initcomponenets
-			utrymme.createDefaultData();
+			utrymmet.createDefaultData();
 		}
-		utrymme.printVaror();
+		utrymmet.printVaror();
 
 		setSize(SIZEX, SIZEY); // Window size
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ensure app exits properly
@@ -69,7 +68,7 @@ public class gui extends JFrame {
 	private void initComponents() { //möjlig förbättreign: skippa att lägga btn i arraylist
 
 
-		for (AbsVaror vara : utrymme.varor) {
+		for (AbsVaror vara : utrymmet.varor) {
 			JButton btn = new JButton(vara.getSort()+": " + vara.getAntal());
 			btn.addActionListener(e -> { //arrow funktion
 				vara.reduceraAntal(); //callar funktionen som är ärvd av absvaror
@@ -99,7 +98,7 @@ public class gui extends JFrame {
 	private void save() {
 
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("objekt.txt")))) {
-			out.writeObject(utrymme.varor); // Save the utrymme object'
+			out.writeObject(utrymmet.varor); // Save the utrymme object'
 			out.close();
 			out.flush();
 			System.out.println("Data saved successfully.");
@@ -115,7 +114,7 @@ public class gui extends JFrame {
 
 			ObjectInputStream infil = new ObjectInputStream(new FileInputStream(new File("objekt.txt")));
 
-			utrymme.varor = (ArrayList<AbsVaror>) infil.readObject();
+			utrymmet.varor = (ArrayList<AbsVaror>) infil.readObject();
 			infil.close();
 			System.out.println("laddar in objekt");
 			return true;

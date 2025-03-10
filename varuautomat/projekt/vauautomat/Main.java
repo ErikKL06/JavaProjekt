@@ -6,8 +6,8 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Utrymme utrymme = new Utrymme();
-		new gui(utrymme);
+		Utrymme utrymmet = new Utrymme();
+		new gui(utrymmet);
 	}
 
 }
