@@ -3,8 +3,10 @@ package vauautomat;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import javax.swing.JButton;
@@ -42,6 +44,7 @@ public class gui extends JFrame {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				System.out.println("Opening window...");
+				load();
 			}
 		});
 
@@ -102,5 +105,20 @@ public class gui extends JFrame {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(this, "Error: Failed to write to file");
 		}
+	}
+
+	private void load() {
+		try {
+
+			ObjectInputStream infil = new ObjectInputStream(new FileInputStream("objekt.dat"));
+			utrymme = (Utrymme) infil.readObject();
+			infil.close();
+			System.out.println("laddar in objekt");
+
+		} catch (ClassNotFoundException | IOException ex2) {
+			ex2.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error: Failed to read file");
+		}
+
 	}
 }
