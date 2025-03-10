@@ -3,7 +3,7 @@ package vauautomat;
 import java.io.Serializable;
 
 public class PocketbokSub extends AbsVaror implements Serializable {
-	private static final long serialVersionUID = 1L; // Ensure compatibility when saving/loading
+
 	private String sort;
 
 	// konstruktor

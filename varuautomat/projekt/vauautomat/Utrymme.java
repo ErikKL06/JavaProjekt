@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Utrymme implements Serializable {
-
-	private static final long serialVersionUID = 1L; // Ensure compatibility when saving/loading
 	private ArrayList<AbsVaror> varor;
 
 	public Utrymme() {
