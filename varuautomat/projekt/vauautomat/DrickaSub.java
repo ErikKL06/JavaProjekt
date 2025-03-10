@@ -1,8 +1,6 @@
 package vauautomat;
 
-import java.io.Serializable;
-
-public class DrickaSub extends AbsVaror implements Serializable {
+public class DrickaSub extends AbsVaror {
 	private String sort;
 
 	// konstruktor

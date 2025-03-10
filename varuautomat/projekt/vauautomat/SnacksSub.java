@@ -1,8 +1,6 @@
 package vauautomat;
 
-import java.io.Serializable;
-
-public class SnacksSub extends AbsVaror implements Serializable {
+public class SnacksSub extends AbsVaror {
 	private String sort;
 
 	// konstruktor

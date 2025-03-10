@@ -1,10 +1,9 @@
 package vauautomat;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Utrymme implements Serializable {
-	private ArrayList<AbsVaror> varor;
+public class Utrymme {
+	public ArrayList<AbsVaror> varor;
 
 	public Utrymme() {
 		varor = new ArrayList<AbsVaror>();

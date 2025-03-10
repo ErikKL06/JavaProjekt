@@ -1,8 +1,6 @@
 package vauautomat;
 
-import java.io.Serializable;
-
-public class PocketbokSub extends AbsVaror implements Serializable {
+public class PocketbokSub extends AbsVaror {
 
 	private String sort;
 

@@ -3,11 +3,13 @@ package vauautomat;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -97,8 +99,10 @@ public class gui extends JFrame {
 
 	private void save() {
 
-		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("objekt.dat"))) {
-			out.writeObject(utrymme); // Save the utrymme object
+		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("objekt.txt")))) {
+			out.writeObject(utrymme.varor); // Save the utrymme object'
+			out.close();
+			out.flush();
 			System.out.println("Data saved successfully.");
 			System.out.println("filen ligger i: " + System.getProperty("user.dir"));
 		} catch (IOException e) {
@@ -110,8 +114,9 @@ public class gui extends JFrame {
 	private void load() {
 		try {
 
-			ObjectInputStream infil = new ObjectInputStream(new FileInputStream("objekt.dat"));
-			utrymme = (Utrymme) infil.readObject();
+			ObjectInputStream infil = new ObjectInputStream(new FileInputStream(new File("objekt.txt")));
+
+			utrymme.varor = (ArrayList<AbsVaror>) infil.readObject();
 			infil.close();
 			System.out.println("laddar in objekt");
 
