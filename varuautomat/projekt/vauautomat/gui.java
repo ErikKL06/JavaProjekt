@@ -23,14 +23,17 @@ public class gui extends JFrame {
 	private JPanel startPanel, instPanel;
 	private JButton btnAlt1, btnAlt2, btnAlt3, btnSettings;
 	private JTextField txtIn;
+	private Utrymme utrymme; // Add this line
 
-	public gui() {
+	// Modify constructor to accept Utrymme object
+	public gui(Utrymme utrymme) {
+		this.utrymme = utrymme; // Assign the passed object
 		// Window close event
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				System.out.println("Closing window...");
-				save();
+				save(); // No need to pass utrymme here
 			}
 		});
 
@@ -90,10 +93,11 @@ public class gui extends JFrame {
 	}
 
 	private void save() {
+
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("objekt.dat"))) {
-			// Save an actual object here instead of a class
-			out.writeObject("utrymme");
+			out.writeObject(utrymme); // Save the utrymme object
 			System.out.println("Data saved successfully.");
+			System.out.println("filen ligger i: " + System.getProperty("user.dir"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(this, "Error: Failed to write to file");

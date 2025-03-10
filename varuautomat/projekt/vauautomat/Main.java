@@ -29,7 +29,7 @@ public class Main {
 
 		utrymme.printVaror();
 
-		new gui();
+		new gui(utrymme);
 
 	}
 
