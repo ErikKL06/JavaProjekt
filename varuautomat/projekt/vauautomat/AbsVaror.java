@@ -37,6 +37,10 @@ public abstract class AbsVaror implements Serializable {
 		return moms;
 	}
 
+	public void setAntal(int antal) {
+		this.antal = antal;
+	}
+
 	public int getAntal() {
 		return antal;
 	}

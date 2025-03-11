@@ -11,22 +11,21 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class gui extends JFrame {
 
 	private ArrayList<JButton> buttons = new ArrayList<>();
+	JButton köp, avbryt;
+	JTextArea varukorg;
+
 
 	// Window dimensions
 	private final int SIZEX = 500;
 	private final int SIZEY = 500;
 
 	// UI Components
-	private JPanel startPanel, instPanel;
+	private JPanel startPanel;
 	private Utrymme utrymmet; // Add this line
 
 	// Modify constructor to accept Utrymme object
@@ -37,7 +36,7 @@ public class gui extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				System.out.println("Closing window...");
-				save(); // No need to pass utrymme here
+
 			}
 		});
 
@@ -57,7 +56,7 @@ public class gui extends JFrame {
 		utrymmet.printVaror();
 
 		setSize(SIZEX, SIZEY); // Window size
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ensure app exits properly
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // gör så att fönsteret stängs rätt
 		startPanel = new JPanel();
 		initComponents();
 		startView();
@@ -66,27 +65,43 @@ public class gui extends JFrame {
 	}
 
 	private void initComponents() { //möjlig förbättreign: skippa att lägga btn i arraylist
-
+		varukorg = new JTextArea();
+		köp = new JButton("köp");
+		köp.addActionListener(e -> {
+			System.out.println("klickat på köp");
+			JOptionPane.showMessageDialog(startPanel, "Du har köpt");
+			save();
+		});
+		avbryt = new JButton("avbryt");
+		avbryt.addActionListener(e -> {
+			System.out.println("klickat avbryt");
+			JOptionPane.showMessageDialog(startPanel, "Du har avbrutit");
+			load();
+			uppdateraGui();
+		});
 
 		for (AbsVaror vara : utrymmet.varor) {
 			JButton btn = new JButton(vara.getSort()+": " + vara.getAntal());
 			btn.addActionListener(e -> { //arrow funktion
 				vara.reduceraAntal(); //callar funktionen som är ärvd av absvaror
 				btn.setText(vara.getSort()+": " + vara.getAntal()); //updaterar gui
+				varukorg.append(vara.getSort()+": " + vara.getAntal() + "\n"); //lägger till i textarea
 				if(vara.getAntal() == 0){btn.setEnabled(false);} //sänger av knappen om den är tom
 
 			});
 			if(vara.getTyp().equals("Dricka")) {btn.setBackground(Color.yellow);}
-			if(vara.getTyp().equals("Snacks")) {btn.setBackground(Color.LIGHT_GRAY);}
+			if(vara.getTyp().equals("Snack")) {btn.setBackground(Color.green);}
 			if(vara.getTyp().equals("Pocketbok")) {btn.setBackground(Color.pink);}
 			if(vara.getAntal() <= 0){btn.setEnabled(false);} //sänger av knappen om den är tom
 			buttons.add(btn); // Save the buttons
 		}
-
 	}
 
 	private void startView() {
-		startPanel.setLayout(new GridLayout(3, 3));
+		startPanel.setLayout(new GridLayout(4, 3));
+		startPanel.add(varukorg);
+		startPanel.add(köp);
+		startPanel.add(avbryt);
 		for (JButton btn : buttons) {
 			startPanel.add(btn);
 		}
@@ -96,7 +111,6 @@ public class gui extends JFrame {
 	}
 
 	private void save() {
-
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("objekt.txt")))) {
 			out.writeObject(utrymmet.varor); // Save the utrymme object'
 			out.close();
@@ -125,5 +139,11 @@ public class gui extends JFrame {
 
 		}
 
+	}
+	private void uppdateraGui(){
+		buttons.clear();
+		startPanel.removeAll();
+		initComponents();
+		startView();
 	}
 }
