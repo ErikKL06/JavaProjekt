@@ -4,10 +4,11 @@ import javax.swing.*;
 
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		Utrymme utrymmet = new Utrymme();
-		new gui(utrymmet);
-	}
+        Utrymme utrymmet = new Utrymme();
+        historikHanterarer historik = new historikHanterarer();
+        new gui(utrymmet, historik);
+    }
 
 }
