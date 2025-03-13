@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         Utrymme utrymmet = new Utrymme();
-        historikHanterarer historik = new historikHanterarer();
+        Utrymme historik = new Utrymme();
         new gui(utrymmet, historik);
     }
 

@@ -17,15 +17,16 @@ public class gui extends JFrame {
     // UI Components
     private JPanel startPanel;
     private Utrymme utrymmet; // Add this line
-    private historikHanterarer historik;
+    private Utrymme historik;
     private ArrayList<JButton> buttons = new ArrayList<>();
     private JButton köp, avbryt;
     private JTextArea varukorg;
     private JButton loadCSV;
 
     // Modify constructor to accept Utrymme object
-    public gui(Utrymme utrymmet, historikHanterarer historik) {
+    public gui(Utrymme utrymmet, Utrymme historik) {
         this.utrymmet = utrymmet; // Assign the passed object
+        this.historik = historik;
         // Window close event
         addWindowListener(new WindowAdapter() {
             @Override
@@ -91,10 +92,16 @@ public class gui extends JFrame {
                 vara.reduceraAntal(); //callar funktionen som är ärvd av absvaror
                 btn.setText(vara.getSort() + ": " + vara.getAntal()); //updaterar knappguin
                 varukorg.append(vara.getSort() + ": " + 1 + "\n"); //lägger till i textarea
-                historik.addItem(vara);
+
+                AbsVaror historikVara = vara.clone(); //klonar
+                historik.addVaraToHistorik(historikVara);
+                historik.printVaror();
+
+
                 if (vara.getAntal() == 0) {
                     btn.setEnabled(false);
                 } //sänger av knappen om den är tom
+
 
             });
             if (vara.getTyp().equals("Dricka")) {
