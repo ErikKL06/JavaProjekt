@@ -20,7 +20,6 @@ public class gui extends JFrame {
     private Utrymme utrymmet; // Add this line
     private HashMap<AbsVaror, Integer> varaClickMap = new HashMap<>();
     private ArrayList<JButton> buttons = new ArrayList<>();
-    private JButton btnCola, btnOrange, btnLime, btnChips, btnNuts, btnGum, btnSoT, btnSE, btnTGH;
     private JButton köp, avbryt;
     private JTextArea varukorg;
     private JButton loadCSV;
@@ -87,18 +86,6 @@ public class gui extends JFrame {
             utrymmet.load();
             uppdateraGui();
         });
-
-        btnCola = new JButton("Cola");
-        btnCola.addActionListener(e -> {
-        });
-        btnOrange = new JButton("Orange");
-        btnLime = new JButton("Lime");
-        btnChips = new JButton("Chips");
-        btnGum = new JButton("Gum");
-        btnNuts = new JButton("Nuts");
-        btnSoT = new JButton("Sea of Tranquility");
-        btnSE = new JButton("Station elven");
-        btnTGH = new JButton("The glass hotel");
 
         for (AbsVaror vara : utrymmet.varor) {
             JButton btn = new JButton(vara.getSort() + ": " + vara.getAntal());
