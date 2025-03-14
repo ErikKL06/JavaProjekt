@@ -75,6 +75,8 @@ public class gui extends JFrame {
             try {
                 utrymmet.save();
                 utrymmet.saveKöpHistorik(varaClickMap);
+                varaClickMap.clear();
+                updateVarukorgDisplay();
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(startPanel, "kunde inte spara");
             }
