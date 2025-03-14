@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Utrymme {
@@ -132,8 +133,21 @@ public class Utrymme {
         }
     }
 
-    public boolean saveKöpHistorik() { //gör en txt fil som lägger till objektet historik.varor
-        return true;
+    public void saveKöpHistorik(HashMap<AbsVaror, Integer> köpHistorik) {
+        // Specify the file path where you want to save the data
+        String filePath = "köpHistorik.txt";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            for (AbsVaror vara : köpHistorik.keySet()) {
+                // Write each entry to the file
+                writer.write("Vara: " + vara.toStringWithoutAntal() + ", Count: " + köpHistorik.get(vara));
+                writer.newLine(); // Move to the next line
+            }
+            System.out.println("KöpHistorik has been saved to " + filePath);
+        } catch (IOException e) {
+            System.err.println("Error while saving KöpHistorik: " + e.getMessage());
+        }
+
     }
 
 

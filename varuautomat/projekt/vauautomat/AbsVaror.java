@@ -53,6 +53,12 @@ public abstract class AbsVaror implements Serializable {
         return antal;
     }
 
+    public String toStringWithoutAntal() {
+        // Customize the string representation by excluding the `antal` property
+        return ", Price: " + this.pris + ", Moms: " + this.moms; // Replace with other properties
+    }
+
+
     // abstrakt metod, ej färdig , måste komppleteras i subclassen
     public abstract void print();
 
