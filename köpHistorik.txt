@@ -4,3 +4,5 @@ Vara: Chips, Price: 10, Moms: 12, Count: 2
 Vara: Chips, Price: 10, Moms: 12, Count: 1
 Vara: Orange, Price: 20, Moms: 12, Count: 2
 Vara: Coca Cola, Price: 20, Moms: 12, Count: 1
+Vara: Chips, Price: 10, Moms: 12, Count: 2
+Vara: Orange, Price: 20, Moms: 12, Count: 1
