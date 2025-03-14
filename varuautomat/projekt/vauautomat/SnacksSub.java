@@ -24,7 +24,7 @@ public class SnacksSub extends AbsVaror {
     @Override
     public String toStringWithoutAntal() {
         // Customize the string representation by excluding the `antal` property
-        return "Sort: " + this.getSort() + ", Price: " + this.pris + ", Moms: " + this.moms; // Replace with other properties
+        return this.getSort() + ", Price: " + this.pris + ", Moms: " + this.moms; // Replace with other properties
     }
 
     @Override

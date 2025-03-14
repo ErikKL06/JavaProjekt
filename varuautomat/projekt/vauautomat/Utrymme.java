@@ -22,26 +22,7 @@ public class Utrymme {
     public void addVara(AbsVaror vara) {
         varor.add(vara);
     }
-
-    // Method to add a vara to the historik
-    public void addVaraToHistorik(AbsVaror vara) {
-        boolean found = false;
-
-        // Iterate through historik to check if the vara already exists
-        for (AbsVaror v : varor) {
-            if (Objects.equals(vara, v)) { // Assuming Vara class has a properly implemented equals method
-                v.ökaAntal(); // Increment the antal of the existing vara
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            vara.setAntal(1);
-            addVara(vara);
-        }
-    }
-
+    
     public void createDefaultData() {
         DrickaSub cola = new DrickaSub("Coca Cola");
         addVara(cola);
