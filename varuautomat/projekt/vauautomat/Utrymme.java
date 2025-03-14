@@ -1,6 +1,6 @@
 package vauautomat;
 
-import javax.swing.*;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -107,6 +107,7 @@ public class Utrymme {
     public void saveKöpHistorik(HashMap<AbsVaror, Integer> köpHistorik) {
         LocalDateTime datumTid = LocalDateTime.now();
         DateTimeFormatter datumformat= DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //sätter formatet på datumet
+
         String datum = datumTid.format(datumformat); //gör en string av datumTid i formatet datumformat
 
         try (FileOutputStream fos = new FileOutputStream("köpHistorik.txt", true)) {  //true för att annars bytar den ut all text i filen
