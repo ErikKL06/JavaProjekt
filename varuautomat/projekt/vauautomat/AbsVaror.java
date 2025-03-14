@@ -23,9 +23,6 @@ public abstract class AbsVaror implements Serializable {
         antal--;
     }
 
-    public void ökaAntal() {
-        antal++;
-    }
 
     public String getTyp() {
         return typ;
@@ -35,10 +32,6 @@ public abstract class AbsVaror implements Serializable {
 
     public int getPris() {
         return pris;
-    }
-
-    public int getMoms() {
-        return moms;
     }
 
     public void setAntal(int antal) {

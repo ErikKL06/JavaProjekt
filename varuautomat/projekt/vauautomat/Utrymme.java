@@ -22,7 +22,7 @@ public class Utrymme {
     public void addVara(AbsVaror vara) {
         varor.add(vara);
     }
-    
+
     public void createDefaultData() {
         DrickaSub cola = new DrickaSub("Coca Cola");
         addVara(cola);
@@ -47,9 +47,6 @@ public class Utrymme {
         System.out.println("skapat");
     }
 
-    private void clearItems() {
-        varor.clear();
-    }
 
     public void printVaror() { // möjligt förändrningsbar
         for (AbsVaror vara : varor) {
