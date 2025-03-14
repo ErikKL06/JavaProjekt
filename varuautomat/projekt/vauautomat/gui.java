@@ -18,7 +18,7 @@ public class gui extends JFrame {
     // UI Components
     private JPanel startPanel;
     private Utrymme utrymmet; // Add this line
-    private HashMap<AbsVaror, Integer> varaClickMap = new HashMap<>();
+    private HashMap<AbsVaror, Integer> varaHashMap = new HashMap<>();
     private ArrayList<JButton> buttons = new ArrayList<>();
     private JButton köp, avbryt;
     private JTextArea varukorg;
@@ -48,7 +48,6 @@ public class gui extends JFrame {
         if (utrymmet.load() == false) { //måste köra utanför opening windows eftersom annars kommer den inte hinna ladda in innan initcomponenets
             utrymmet.createDefaultData();
         }
-        utrymmet.printVaror();
 
         setSize(SIZEX, SIZEY); // Window size
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // gör så att fönsteret stängs rätt
@@ -73,8 +72,8 @@ public class gui extends JFrame {
             JOptionPane.showMessageDialog(startPanel, "Du har köpt");
             try {
                 utrymmet.save();
-                utrymmet.saveKöpHistorik(varaClickMap);
-                varaClickMap.clear();
+                utrymmet.saveKöpHistorik(varaHashMap);
+                varaHashMap.clear();
                 updateVarukorgDisplay();
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(startPanel, "kunde inte spara");
@@ -85,6 +84,7 @@ public class gui extends JFrame {
             System.out.println("klickat avbryt");
             JOptionPane.showMessageDialog(startPanel, "Du har avbrutit");
             utrymmet.load();
+            varaHashMap.clear(); //rensar hashmap som sparar varor
             uppdateraGui();
         });
 
@@ -141,27 +141,27 @@ public class gui extends JFrame {
     }
 
     private void handleVaraClick(AbsVaror vara) {
-        if (varaClickMap.containsKey(vara)) {
+        if (varaHashMap.containsKey(vara)) {
             // Increment the count for the vara
-            varaClickMap.put(vara, varaClickMap.get(vara) + 1);
+            varaHashMap.put(vara, varaHashMap.get(vara) + 1);
         } else {
             // Add the vara to the HashMap with a count of 1
-            varaClickMap.put(vara, 1);
+            varaHashMap.put(vara, 1);
         }
-        // Update varukorg display with the current contents of varaClickMap
+        // Update varukorg display with the current contents of varaHashMap
         updateVarukorgDisplay();
         // Optional: Debug log
-        System.out.println("Vara: " + vara.getSort() + " clicked " + varaClickMap.get(vara) + " times.");
+        System.out.println("Vara: " + vara.getSort() + " clicked " + varaHashMap.get(vara) + " times.");
         // Print to demonstrate the updated count (can be replaced with other logic like UI update)
     }
 
     // Update the JTextArea (varukorg) with the HashMap contents
     private void updateVarukorgDisplay() {
-        StringBuilder displayContent = new StringBuilder("Varukorg Contents:\n");
-        for (AbsVaror vara : varaClickMap.keySet()) {
+        StringBuilder displayContent = new StringBuilder();
+        for (AbsVaror vara : varaHashMap.keySet()) {
             displayContent.append(vara.getSort())
                     .append(" - Count: ")
-                    .append(varaClickMap.get(vara))
+                    .append(varaHashMap.get(vara))
                     .append("\n");
         }
         varukorg.setText(displayContent.toString());
