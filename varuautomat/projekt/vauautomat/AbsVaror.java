@@ -18,15 +18,6 @@ public abstract class AbsVaror implements Serializable {
         this.antal = antal;
     }
 
-    public AbsVaror clone() {
-        try {
-            return (AbsVaror) super.clone(); // Clone using Object.clone()
-        } catch (CloneNotSupportedException e) {
-            // If cloning isn't supported, manually create a new object
-            throw new AssertionError(); // Shouldn't happen because AbsVaror is Cloneable
-        }
-    }
-
 
     public void reduceraAntal() {
         antal--;
@@ -56,10 +47,6 @@ public abstract class AbsVaror implements Serializable {
 
     public void setAntal(Integer antal) {
         this.antal = antal;
-    }
-
-    public AbsVaror getVara() {
-        return this;
     }
 
     public int getAntal() {
