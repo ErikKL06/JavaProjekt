@@ -32,7 +32,6 @@ public class gui extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.out.println("Closing window...");
-
             }
         });
 
@@ -60,7 +59,7 @@ public class gui extends JFrame {
         setVisible(true); // Set visible at the end
     }
 
-    private void initComponents() { //möjlig förbättreign: skippa att lägga btn i arraylist
+    private void initComponents() {
         varukorg = new JTextArea();
         loadCSV = new JButton("Ladda in CSV");
         loadCSV.addActionListener(e -> {
@@ -89,6 +88,7 @@ public class gui extends JFrame {
             uppdateraGui();
         });
 
+        //skapar varo-knapp och funktionen när man clicka på den
         for (AbsVaror vara : utrymmet.varor) {
             JButton btn = new JButton(vara.getSort() + ": " + vara.getAntal());
             btn.addActionListener(e -> { //arrow funktion för att minska antal
