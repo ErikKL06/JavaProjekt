@@ -61,7 +61,9 @@ public class gui extends JFrame {
 
     private void initComponents() {
         varukorg = new JTextArea();
+        varukorg.setEditable(false);
         varukorgPris = new JTextArea();
+        varukorgPris.setEditable(false);
         loadCSV = new JButton("Ladda in CSV");
         loadCSV.addActionListener(e -> {
             JOptionPane.showMessageDialog(startPanel, "CSV laddad");
