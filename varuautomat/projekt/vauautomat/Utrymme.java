@@ -19,31 +19,27 @@ public class Utrymme {
         varor = new ArrayList<AbsVaror>();
     }
 
-    public void addVara(AbsVaror vara) {
-        varor.add(vara);
-    }
-
     public void createDefaultData() {
         DrickaSub cola = new DrickaSub("Coca Cola");
-        addVara(cola);
+        varor.add(cola);
         DrickaSub orange = new DrickaSub("Orange");
-        addVara(orange);
+        varor.add(orange);
         DrickaSub lime = new DrickaSub("Lime");
-        addVara(lime);
+        varor.add(lime);
 
         SnacksSub chips = new SnacksSub("Chips");
-        addVara(chips);
+        varor.add(chips);
         SnacksSub nuts = new SnacksSub("Nötter");
-        addVara(nuts);
+        varor.add(nuts);
         SnacksSub gum = new SnacksSub("gum");
-        addVara(gum);
+        varor.add(gum);
 
         PocketbokSub SoT = new PocketbokSub("Sea of Tranquility");
-        addVara(SoT);
+        varor.add(SoT);
         PocketbokSub SE = new PocketbokSub("Station elven");
-        addVara(SE);
+        varor.add(SE);
         PocketbokSub TGH = new PocketbokSub("The glass hotel");
-        addVara(TGH);
+        varor.add(TGH);
         System.out.println("skapat");
     }
 
