@@ -172,10 +172,7 @@ public class gui extends JFrame {
             // Append the vara details to the varukorg display
             varukorgContent.append(vara.getSort()) // Assume AbsVaror has a method getNamn()
                     .append(" x ")
-                    .append(antal)
-                    .append(" = ")
-                    .append(String.format("%.2f", itemTotalPris)) // Format the price to 2 decimal places
-                    .append(" SEK\n");
+                    .append(antal);
             // Add the item total to the overall total
             totalPris += itemTotalPris;
         }
