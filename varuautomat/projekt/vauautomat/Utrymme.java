@@ -75,13 +75,19 @@ public class Utrymme {
         }
     }
 
-    public void save() throws IOException {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("objekt.txt"))) {
-            out.writeObject(varor); // Save the utrymme object
-            System.out.println("Data saved successfully.");
-            System.out.println("filen ligger i: " + System.getProperty("user.dir"));
-        }
 
+    public void save() {
+        //skapar objekt i array:en collection
+        try {
+            FileOutputStream fos = new FileOutputStream("objekt.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(varor);
+            oos.close();
+            oos.flush();
+            System.out.println("filen ligger i: " + System.getProperty("user.dir"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -100,9 +106,10 @@ public class Utrymme {
 
         }
     }
+
     public void saveKöpHistorik(HashMap<AbsVaror, Integer> köpHistorik) {
         LocalDateTime datumTid = LocalDateTime.now();
-        DateTimeFormatter datumformat= DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //sätter formatet på datumet
+        DateTimeFormatter datumformat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //sätter formatet på datumet
 
         String datum = datumTid.format(datumformat); //gör en string av datumTid i formatet datumformat
 
@@ -116,7 +123,6 @@ public class Utrymme {
             System.err.println("kunde inte spara historik: " + e.getMessage());
         }
     }
-
 
 
 }

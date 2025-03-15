@@ -25,8 +25,9 @@ public class gui extends JFrame {
     private JButton loadCSV;
 
     // Modify constructor to accept Utrymme object
-    public gui(Utrymme utrymmet, Utrymme historik) {
+    public gui(Utrymme utrymmet) {
         this.utrymmet = utrymmet; // Assign the passed object
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // gör så att fönsteret stängs rätt
         // Window close event
         addWindowListener(new WindowAdapter() {
             @Override
@@ -50,7 +51,7 @@ public class gui extends JFrame {
         }
 
         setSize(SIZEX, SIZEY); // Window size
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // gör så att fönsteret stängs rätt
+
         startPanel = new JPanel();
         initComponents();
         startView();
@@ -75,7 +76,7 @@ public class gui extends JFrame {
                 utrymmet.saveKöpHistorik(varaHashMap);
                 varaHashMap.clear();
                 updateVarukorgDisplay();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(startPanel, "kunde inte spara");
             }
         });
