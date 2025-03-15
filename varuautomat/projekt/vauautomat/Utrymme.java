@@ -1,7 +1,9 @@
 package vauautomat;
 
-import javax.swing.*;
+
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,7 +12,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class Utrymme {
     public ArrayList<AbsVaror> varor;
@@ -41,13 +42,6 @@ public class Utrymme {
         PocketbokSub TGH = new PocketbokSub("The glass hotel");
         varor.add(TGH);
         System.out.println("skapat");
-    }
-
-
-    public void printVaror() { // möjligt förändrningsbar
-        for (AbsVaror vara : varor) {
-            System.out.println(vara.toString());
-        }
     }
 
     public void loadCSV() {
@@ -106,23 +100,23 @@ public class Utrymme {
 
         }
     }
-
     public void saveKöpHistorik(HashMap<AbsVaror, Integer> köpHistorik) {
-        // Specify the file path where you want to save the data
-        String filePath = "köpHistorik.txt";
+        LocalDateTime datumTid = LocalDateTime.now();
+        DateTimeFormatter datumformat= DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //sätter formatet på datumet
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+        String datum = datumTid.format(datumformat); //gör en string av datumTid i formatet datumformat
+
+        try (FileOutputStream fos = new FileOutputStream("köpHistorik.txt", true)) {  //true för att annars bytar den ut all text i filen
             for (AbsVaror vara : köpHistorik.keySet()) {
-                // Write each entry to the file
-                writer.write("Vara: " + vara.toStringWithoutAntal() + ", Count: " + köpHistorik.get(vara));
-                writer.newLine(); // Move to the next line
+                String line = "Vara: " + vara.toStringWithoutAntal() + ", Antal: " + köpHistorik.get(vara) + ", Datum: " + datum + "\n";
+                fos.write(line.getBytes()); //.getBytes gör om stringen till utf-8
             }
-            System.out.println("KöpHistorik has been saved to " + filePath);
+            System.out.println("KöpHistorik är sparat i: " + "köpHistorik.txt");
         } catch (IOException e) {
-            System.err.println("Error while saving KöpHistorik: " + e.getMessage());
+            System.err.println("kunde inte spara historik: " + e.getMessage());
         }
-
     }
+
 
 
 }
