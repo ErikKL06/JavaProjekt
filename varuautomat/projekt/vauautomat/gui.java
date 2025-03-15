@@ -21,7 +21,7 @@ public class gui extends JFrame {
     private HashMap<AbsVaror, Integer> varaHashMap = new HashMap<>();
     private ArrayList<JButton> buttons = new ArrayList<>();
     private JButton köp, avbryt;
-    private JTextArea varukorg;
+    private JTextArea varukorg, varukorgPris;
     private JButton loadCSV;
 
     // Modify constructor to accept Utrymme object
@@ -61,6 +61,7 @@ public class gui extends JFrame {
 
     private void initComponents() {
         varukorg = new JTextArea();
+        varukorgPris = new JTextArea();
         loadCSV = new JButton("Ladda in CSV");
         loadCSV.addActionListener(e -> {
             JOptionPane.showMessageDialog(startPanel, "CSV laddad");
@@ -119,9 +120,10 @@ public class gui extends JFrame {
     }
 
     private void startView() {
-        startPanel.setLayout(new GridLayout(4, 3));
-        startPanel.add(loadCSV);
+        startPanel.setLayout(new GridLayout(5, 3));
         startPanel.add(varukorg);
+        startPanel.add(varukorgPris);
+        startPanel.add(loadCSV);
         startPanel.add(köp);
 
         startPanel.add(avbryt);
@@ -145,6 +147,7 @@ public class gui extends JFrame {
         if (varaHashMap.containsKey(vara)) {
             // Increment the count for the vara
             varaHashMap.put(vara, varaHashMap.get(vara) + 1);
+
         } else {
             // Add the vara to the HashMap with a count of 1
             varaHashMap.put(vara, 1);
@@ -158,15 +161,30 @@ public class gui extends JFrame {
 
     // Update the JTextArea (varukorg) with the HashMap contents
     private void updateVarukorgDisplay() {
-        StringBuilder displayContent = new StringBuilder();
+        StringBuilder varukorgContent = new StringBuilder();
+        double totalPris = 0.0; // Initialize total price
+
         for (AbsVaror vara : varaHashMap.keySet()) {
-            displayContent.append(vara.getSort())
-                    .append(" - Count: ")
-                    .append(varaHashMap.get(vara))
-                    .append("\n");
+            int antal = varaHashMap.get(vara); // Get the quantity of the item
+            double pris = vara.getPris(); // Assume AbsVaror has a method getPris()
+            double itemTotalPris = pris * antal; // Total price for this item
+
+            // Append the vara details to the varukorg display
+            varukorgContent.append(vara.getSort()) // Assume AbsVaror has a method getNamn()
+                    .append(" x ")
+                    .append(antal)
+                    .append(" = ")
+                    .append(String.format("%.2f", itemTotalPris)) // Format the price to 2 decimal places
+                    .append(" SEK\n");
+            // Add the item total to the overall total
+            totalPris += itemTotalPris;
         }
-        varukorg.setText(displayContent.toString());
+        // Update the varukorg text area
+        varukorg.setText(varukorgContent.toString());
+        // Update the varukorgPris text area with the total price
+        varukorgPris.setText("Total Pris: " + String.format("%.2f", totalPris) + " SEK");
     }
+
 }
 
 
