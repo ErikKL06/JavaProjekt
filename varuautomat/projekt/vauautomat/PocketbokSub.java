@@ -18,8 +18,7 @@ public class PocketbokSub extends AbsVaror {
 
     @Override
     public String toStringWithoutAntal() {
-        // Customize the string representation by excluding the `antal` property
-        return this.getSort() + ", Price: " + this.pris + "kr, Moms: " + this.moms + "%"; // Replace with other properties
+        return this.getSort() + ", Price: " + this.pris + "kr, Moms: " + this.moms + "%";
     }
 
 

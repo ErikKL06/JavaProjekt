@@ -27,7 +27,6 @@ public class gui extends JFrame {
     // gui accepterar utrymme
     public gui(Utrymme utrymmet) {
         this.utrymmet = utrymmet;
-        ; // Assign the passed object
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // gör så att fönsteret stängs rätt
         // Window close event
         addWindowListener(new WindowAdapter() {
@@ -179,8 +178,9 @@ public class gui extends JFrame {
 
             varukorgContent.append(vara.getSort()) //lägger till allt i displaten
                     .append(" x ")
-                    .append(antal);
-            // Add the item total to the overall total
+                    .append(antal)
+                    .append("\n");
+            // lägger till i totalpriset
             totalPris += itemTotalPris;
         }
         // uppdaterar varukorgen

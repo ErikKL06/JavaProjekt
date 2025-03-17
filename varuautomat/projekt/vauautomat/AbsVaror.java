@@ -47,8 +47,8 @@ public abstract class AbsVaror implements Serializable {
     }
 
     public String toStringWithoutAntal() {
-        // Customize the string representation by excluding the `antal` property
-        return ", Price: " + this.pris + "kr, Moms: " + this.moms + "%"; // Replace with other properties
+
+        return ", Price: " + this.pris + "kr, Moms: " + this.moms + "%";
     }
 
 
