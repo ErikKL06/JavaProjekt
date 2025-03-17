@@ -14,13 +14,9 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 public class Utrymme {
-    public ArrayList<AbsVaror> varor;
+    public ArrayList<AbsVaror> varor = new ArrayList<>();
 
-    public Utrymme() {
-        varor = new ArrayList<AbsVaror>();
-    }
-
-    public void createDefaultData() {
+    public void skapaObjekt() {
         DrickaSub cola = new DrickaSub("Coca Cola");
         varor.add(cola);
         DrickaSub orange = new DrickaSub("Orange");

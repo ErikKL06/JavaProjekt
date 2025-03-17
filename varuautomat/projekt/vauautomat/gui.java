@@ -3,7 +3,6 @@ package vauautomat;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,13 +10,13 @@ import java.util.HashMap;
 import javax.swing.*;
 
 public class gui extends JFrame {
-    // Window dimensions
+    // Fönster storlek
     private final int SIZEX = 500;
     private final int SIZEY = 500;
 
-    // UI Components
+    // UI komponeneter
     private JPanel startPanel;
-    private Utrymme utrymmet; // Add this line
+    private Utrymme utrymmet;
     private HashMap<AbsVaror, Integer> varaHashMap = new HashMap<>();
     private ArrayList<JButton> buttons = new ArrayList<>();
     private JButton köp, avbryt;
@@ -25,9 +24,10 @@ public class gui extends JFrame {
     private JTextArea varukorg, varukorgPris;
     private JButton loadCSV;
 
-    // Modify constructor to accept Utrymme object
+    // gui accepterar utrymme
     public gui(Utrymme utrymmet) {
-        this.utrymmet = utrymmet; // Assign the passed object
+        this.utrymmet = utrymmet;
+        ; // Assign the passed object
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // gör så att fönsteret stängs rätt
         // Window close event
         addWindowListener(new WindowAdapter() {
@@ -48,26 +48,26 @@ public class gui extends JFrame {
 
         });
         if (utrymmet.load() == false) { //måste köra utanför opening windows eftersom annars kommer den inte hinna ladda in innan initcomponenets
-            utrymmet.createDefaultData();
+            utrymmet.skapaObjekt();
         }
 
-        setSize(SIZEX, SIZEY); // Window size
+        setSize(SIZEX, SIZEY); //sätter storlek
 
         startPanel = new JPanel();
         initComponents();
         startView();
 
-        setVisible(true); // Set visible at the end
+        setVisible(true); // gör den synlig
     }
 
     private void initComponents() {
         erikAutomat = new JLabel("ERIKs AUTOMAT");
         erikAutomat.setHorizontalAlignment(SwingConstants.CENTER);
-        erikAutomat.setOpaque(true);
+        erikAutomat.setOpaque(true); //gör så att man kan ändra bakrundsfärg på jlabel
         erikAutomat.setBackground(Color.white);
         erikAutomat.setFont(erikAutomat.getFont().deriveFont(Font.BOLD | Font.ITALIC));
         varukorg = new JTextArea();
-        varukorg.setEditable(false);
+        varukorg.setEditable(false); //gör att man inte kan skriva in saker
         varukorgPris = new JTextArea();
         varukorgPris.setEditable(false);
         loadCSV = new JButton("Ladda in CSV");
@@ -77,10 +77,9 @@ public class gui extends JFrame {
             utrymmet.loadCSV();
             varaHashMap.clear();
             uppdateraGui();
-        });
+        });  //gör laddar in csv filen och rensar varahashmappen och sen uppdaterar gui.
         köp = new JButton("köp");
         köp.addActionListener(e -> {
-            System.out.println("klickat på köp");
             JOptionPane.showMessageDialog(startPanel, "Du har köpt");
             try {
                 utrymmet.save();
@@ -90,7 +89,7 @@ public class gui extends JFrame {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(startPanel, "kunde inte spara");
             }
-        });
+        }); //try ctch för att hämta fel
         avbryt = new JButton("avbryt");
         avbryt.addActionListener(e -> {
             System.out.println("klickat avbryt");
@@ -112,7 +111,9 @@ public class gui extends JFrame {
                 } //sänger av knappen om den är tom
 
 
-            });
+            }); // foreach loop som skapa alla knappar med en actionlistner
+
+            //gör så att alla knappar med samma klass får samma bakgrundsfärg
             if (vara.getTyp().equals("Dricka")) {
                 btn.setBackground(Color.yellow);
             } //ändra färg
@@ -152,44 +153,39 @@ public class gui extends JFrame {
         startPanel.removeAll();
         initComponents();
         startView();
-    }
+    } //funktion för att uppdaterta gui
 
     private void handleVaraClick(AbsVaror vara) {
-        if (varaHashMap.containsKey(vara)) {
-            // Increment the count for the vara
+        if (varaHashMap.containsKey(vara)) {  //ökar antalet på en vara i hashmapen om objektet redan finns
+
             varaHashMap.put(vara, varaHashMap.get(vara) + 1);
 
         } else {
-            // Add the vara to the HashMap with a count of 1
+            //lägger till i hashmapen om det inte finns något av samma objekt
             varaHashMap.put(vara, 1);
         }
-        // Update varukorg display with the current contents of varaHashMap
         updateVarukorgDisplay();
-        // Optional: Debug log
-        System.out.println("Vara: " + vara.getSort() + " clicked " + varaHashMap.get(vara) + " times.");
-        // Print to demonstrate the updated count (can be replaced with other logic like UI update)
-    }
+    } //funktion som lägger till varje objekt som hare clickat på med en i en hashmap
 
-    // Update the JTextArea (varukorg) with the HashMap contents
+    // funktion för att updatera varukorgens display
     private void updateVarukorgDisplay() {
         StringBuilder varukorgContent = new StringBuilder();
-        double totalPris = 0.0; // Initialize total price
+        double totalPris = 0.0; // instanserar en variable för totalpriset
 
         for (AbsVaror vara : varaHashMap.keySet()) {
-            int antal = varaHashMap.get(vara); // Get the quantity of the item
-            double pris = vara.getPris(); // Assume AbsVaror has a method getPris()
-            double itemTotalPris = pris * antal; // Total price for this item
+            int antal = varaHashMap.get(vara); // hämtar antalet av en vara i varukorgen
+            double pris = vara.getPris(); // hämtar piset
+            double itemTotalPris = pris * antal; // skriver in totala priset för varan
 
-            // Append the vara details to the varukorg display
-            varukorgContent.append(vara.getSort()) // Assume AbsVaror has a method getNamn()
+            varukorgContent.append(vara.getSort()) //lägger till allt i displaten
                     .append(" x ")
                     .append(antal);
             // Add the item total to the overall total
             totalPris += itemTotalPris;
         }
-        // Update the varukorg text area
+        // uppdaterar varukorgen
         varukorg.setText(varukorgContent.toString());
-        // Update the varukorgPris text area with the total price
+        // uppdaterar totalpris-varukorgen
         varukorgPris.setText("Total Pris: " + String.format("%.2f", totalPris) + " SEK");
     }
 
