@@ -14,9 +14,9 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 public class Utrymme {
-    public ArrayList<AbsVaror> varor = new ArrayList<>();
+    public static ArrayList<AbsVaror> varor = new ArrayList<>();
 
-    public void skapaObjekt() {
+    public static void skapaObjekt() {
         DrickaSub cola = new DrickaSub("Coca Cola");
         varor.add(cola);
         DrickaSub orange = new DrickaSub("Orange");
@@ -40,7 +40,7 @@ public class Utrymme {
         System.out.println("skapat");
     } //funktion som skapar alla objekt
 
-    public void loadCSV() {
+    public static void loadCSV() {
         try (BufferedReader br = new BufferedReader(new FileReader("varoFyllnadsform.csv"))) {
             String line;
             while ((line = br.readLine()) != null) { //while sats som kolla så att det finns något att läsa
@@ -72,7 +72,7 @@ public class Utrymme {
     }
 
 
-    public void save() {
+    public static void save() {
         //skapar objekt i array:en collection
         try {
             FileOutputStream fos = new FileOutputStream("objekt.txt");
@@ -87,7 +87,7 @@ public class Utrymme {
     }
 
 
-    public boolean load() {
+    public static boolean load() {
         try {
             ObjectInputStream infil = new ObjectInputStream(new FileInputStream(new File("objekt.txt")));
 
@@ -103,7 +103,7 @@ public class Utrymme {
         }
     }
 
-    public void saveKöpHistorik(HashMap<AbsVaror, Integer> köpHistorik) { //tillåter intag av hashmap
+    public static void saveKöpHistorik(HashMap<AbsVaror, Integer> köpHistorik) { //tillåter intag av hashmap
         LocalDateTime datumTid = LocalDateTime.now();
         DateTimeFormatter datumformat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //sätter formatet på datumet
 
