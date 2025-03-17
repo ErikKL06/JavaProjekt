@@ -17,7 +17,7 @@ public class Utrymme {
     public static ArrayList<AbsVaror> varor = new ArrayList<>();
 
     public static void skapaObjekt() {
-        DrickaSub cola = new DrickaSub("Coca Cola");
+        DrickaSub cola = new DrickaSub("Cola");
         varor.add(cola);
         DrickaSub orange = new DrickaSub("Orange");
         varor.add(orange);
@@ -28,7 +28,7 @@ public class Utrymme {
         varor.add(chips);
         SnacksSub nuts = new SnacksSub("Nötter");
         varor.add(nuts);
-        SnacksSub gum = new SnacksSub("gum");
+        SnacksSub gum = new SnacksSub("Gum");
         varor.add(gum);
 
         PocketbokSub SoT = new PocketbokSub("Sea of Tranquility");

@@ -19,8 +19,8 @@ public class gui extends JFrame {
     private HashMap<AbsVaror, Integer> varaHashMap = new HashMap<>();
     private ArrayList<JButton> buttons = new ArrayList<>();
     private JButton köp, avbryt;
-    private JLabel erikAutomat;
-    private JTextArea varukorg, varukorgPris;
+    private JLabel erikAutomat, varukorgPris;
+    private JTextArea varukorg;
     private JButton loadCSV;
 
     // gui accepterar utrymme
@@ -63,10 +63,15 @@ public class gui extends JFrame {
         erikAutomat.setOpaque(true); //gör så att man kan ändra bakrundsfärg på jlabel
         erikAutomat.setBackground(Color.white);
         erikAutomat.setFont(erikAutomat.getFont().deriveFont(Font.BOLD | Font.ITALIC));
+
         varukorg = new JTextArea();
         varukorg.setEditable(false); //gör att man inte kan skriva in saker
-        varukorgPris = new JTextArea();
-        varukorgPris.setEditable(false);
+
+        varukorgPris = new JLabel();
+        varukorgPris.setHorizontalAlignment(SwingConstants.CENTER);
+        varukorgPris.setOpaque(true);
+        varukorgPris.setBackground(Color.white);
+
         loadCSV = new JButton("Ladda in CSV");
         loadCSV.addActionListener(e -> {
 
@@ -75,6 +80,7 @@ public class gui extends JFrame {
             varaHashMap.clear();
             uppdateraGui();
         });  //gör laddar in csv filen och rensar varahashmappen och sen uppdaterar gui.
+
         köp = new JButton("köp");
         köp.addActionListener(e -> {
             JOptionPane.showMessageDialog(startPanel, "Du har köpt");
@@ -87,6 +93,7 @@ public class gui extends JFrame {
                 JOptionPane.showMessageDialog(startPanel, "kunde inte spara");
             }
         }); //try ctch för att hämta fel
+        
         avbryt = new JButton("avbryt");
         avbryt.addActionListener(e -> {
             System.out.println("klickat avbryt");
