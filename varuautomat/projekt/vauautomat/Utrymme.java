@@ -86,7 +86,6 @@ public class Utrymme {
         }
     }
 
-
     public static boolean load() {
         try {
             ObjectInputStream infil = new ObjectInputStream(new FileInputStream(new File("objekt.txt")));
