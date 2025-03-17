@@ -14,12 +14,4 @@ public class PocketbokSub extends AbsVaror {
     public String getSort() {
         return sort;
     }
-
-
-    @Override
-    public String toStringWithoutAntal() {
-        return this.getSort() + ", Price: " + this.pris + "kr, Moms: " + this.moms + "%";
-    }
-
-
 }

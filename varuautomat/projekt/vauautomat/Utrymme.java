@@ -57,7 +57,7 @@ public class Utrymme {
 
                     for (AbsVaror vara : varor) {
                         if (vara.getSort().equalsIgnoreCase(Sort)) {
-                            vara.setAntal(NyAntal); //Sätter antalet på objektet
+                            vara.antal = NyAntal; //Sätter antalet på objektet
                             break;
                         }
                     }
@@ -110,7 +110,7 @@ public class Utrymme {
 
         try (FileOutputStream fos = new FileOutputStream("köpHistorik.txt", true)) {  //true för att annars bytar den ut all text i filen
             for (AbsVaror vara : köpHistorik.keySet()) {
-                String line = "Vara: " + vara.toStringWithoutAntal() + ", Antal: " + köpHistorik.get(vara) + ", Datum: " + datum + "\n";
+                String line = "Vara: " + vara.getSort() + ", Typ: " + vara.typ + ", Pris: " + vara.pris + ", Moms: " + vara.moms + ", Antal: " + köpHistorik.get(vara) + ", Datum: " + datum + "\n";
                 fos.write(line.getBytes()); //.getBytes gör om stringen till utf-8
             }
             System.out.println("KöpHistorik är sparat i: " + "köpHistorik.txt");

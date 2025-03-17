@@ -1,3 +1,2 @@
-Vara: Orange, Price: 20kr, Moms: 12%, Antal: 2, Datum: 17-03-2025 10:53:50
-Vara: Nötter, Price: 10kr, Moms: 12%, Antal: 2, Datum: 17-03-2025 10:54:10
-Vara: Coca Cola, Price: 20kr, Moms: 12%, Antal: 1, Datum: 17-03-2025 10:54:23
+Vara: Orange, Typ: Dricka, Pris: 20, Moms: 12, Antal: 2, Datum: 17-03-2025 11:16:38
+Vara: Lime, Typ: Dricka, Pris: 20, Moms: 12, Antal: 2, Datum: 17-03-2025 11:17:52

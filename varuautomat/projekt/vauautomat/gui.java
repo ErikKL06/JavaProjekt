@@ -98,12 +98,12 @@ public class gui extends JFrame {
 
         //skapar varo-knapp och funktionen när man clicka på den
         for (AbsVaror vara : Utrymme.varor) {
-            JButton btn = new JButton(vara.getSort() + ": " + vara.getAntal());
+            JButton btn = new JButton(vara.getSort() + ": " + vara.antal);
             btn.addActionListener(e -> { //arrow funktion för att minska antal
-                vara.reduceraAntal(); //callar funktionen som är ärvd av absvaror
-                btn.setText(vara.getSort() + ": " + vara.getAntal()); //updaterar knappguin
+                vara.antal--; //callar funktionen som är ärvd av absvaror
+                btn.setText(vara.getSort() + ": " + vara.antal); //updaterar knappguin
                 handleVaraClick(vara);
-                if (vara.getAntal() == 0) {
+                if (vara.antal == 0) {
                     btn.setEnabled(false);
                 } //sänger av knappen om den är tom
 
@@ -111,16 +111,16 @@ public class gui extends JFrame {
             }); // foreach loop som skapa alla knappar med en actionlistner
 
             //gör så att alla knappar med samma klass får samma bakgrundsfärg
-            if (vara.getTyp().equals("Dricka")) {
+            if (vara.typ.equals("Dricka")) {
                 btn.setBackground(Color.yellow);
             } //ändra färg
-            if (vara.getTyp().equals("Snack")) {
+            if (vara.typ.equals("Snack")) {
                 btn.setBackground(Color.green);
             } //ändra färg
-            if (vara.getTyp().equals("Pocketbok")) {
+            if (vara.typ.equals("Pocketbok")) {
                 btn.setBackground(Color.pink);
             } //ändra färg
-            if (vara.getAntal() <= 0) {
+            if (vara.antal <= 0) {
                 btn.setEnabled(false);
             } //sänger av knappen om den är tom
             buttons.add(btn); //lägger till knappen i knapp-arrayen
@@ -171,7 +171,7 @@ public class gui extends JFrame {
 
         for (AbsVaror vara : varaHashMap.keySet()) {
             int antal = varaHashMap.get(vara); // hämtar antalet av en vara i varukorgen
-            double pris = vara.getPris(); // hämtar piset
+            double pris = vara.pris; // hämtar piset
             double itemTotalPris = pris * antal; // skriver in totala priset för varan
 
             varukorgContent.append(vara.getSort()) //lägger till allt i displaten

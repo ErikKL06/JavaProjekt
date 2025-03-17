@@ -18,35 +18,5 @@ public abstract class AbsVaror implements Serializable {
         this.antal = antal;
     }
 
-
-    public void reduceraAntal() {
-        antal--;
-    }
-
-
-    public String getTyp() {
-        return typ;
-    }
-
     public abstract String getSort();
-
-    public int getPris() {
-        return pris;
-    }
-
-    public void setAntal(int antal) {
-        this.antal = antal;
-    }
-
-
-    public int getAntal() {
-        return antal;
-    }
-
-    public String toStringWithoutAntal() {
-
-        return ", Price: " + this.pris + "kr, Moms: " + this.moms + "%";
-    }
-
-
 }
