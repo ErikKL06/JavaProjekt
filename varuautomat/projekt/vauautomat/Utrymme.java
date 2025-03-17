@@ -73,6 +73,7 @@ public class Utrymme {
         } catch (IOException e) {
             System.err.println("Error reading CSV file: " + e.getMessage());
         }
+
     }
 
 

@@ -21,6 +21,7 @@ public class gui extends JFrame {
     private HashMap<AbsVaror, Integer> varaHashMap = new HashMap<>();
     private ArrayList<JButton> buttons = new ArrayList<>();
     private JButton köp, avbryt;
+    private JLabel erikAutomat;
     private JTextArea varukorg, varukorgPris;
     private JButton loadCSV;
 
@@ -60,14 +61,21 @@ public class gui extends JFrame {
     }
 
     private void initComponents() {
+        erikAutomat = new JLabel("ERIKs AUTOMAT");
+        erikAutomat.setHorizontalAlignment(SwingConstants.CENTER);
+        erikAutomat.setOpaque(true);
+        erikAutomat.setBackground(Color.white);
+        erikAutomat.setFont(erikAutomat.getFont().deriveFont(Font.BOLD | Font.ITALIC));
         varukorg = new JTextArea();
         varukorg.setEditable(false);
         varukorgPris = new JTextArea();
         varukorgPris.setEditable(false);
         loadCSV = new JButton("Ladda in CSV");
         loadCSV.addActionListener(e -> {
+
             JOptionPane.showMessageDialog(startPanel, "CSV laddad");
             utrymmet.loadCSV();
+            varaHashMap.clear();
             uppdateraGui();
         });
         köp = new JButton("köp");
@@ -125,6 +133,7 @@ public class gui extends JFrame {
         startPanel.setLayout(new GridLayout(5, 3));
         startPanel.add(varukorg);
         startPanel.add(varukorgPris);
+        startPanel.add(erikAutomat);
         startPanel.add(loadCSV);
         startPanel.add(köp);
 
