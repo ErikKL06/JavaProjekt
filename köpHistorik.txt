@@ -1,0 +1,2 @@
+Vara: Orange, Typ: Dricka, Pris: 20, Moms: 12, Antal: 2, Datum: 18-03-2025 11:57:01
+Vara: Lime, Typ: Dricka, Pris: 20, Moms: 12, Antal: 2, Datum: 18-03-2025 11:58:25
