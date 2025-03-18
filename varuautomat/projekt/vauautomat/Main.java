@@ -49,9 +49,7 @@ public class Main extends JFrame {
 
 
         });
-        if (Utrymme.load() == false) { //måste köra utanför opening windows eftersom annars kommer den inte hinna ladda in innan initcomponenets
-            Utrymme.skapaObjekt();
-        }
+        Utrymme.load();
 
         setSize(SIZEX, SIZEY); //sätter storlek
 

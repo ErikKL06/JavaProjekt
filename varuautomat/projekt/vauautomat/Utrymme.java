@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class Utrymme {
     public static ArrayList<AbsVaror> varor = new ArrayList<>();
 
-    public static void skapaObjekt() {
+    private static void skapaObjekt() {
         DrickaSub cola = new DrickaSub("Cola");
         varor.add(cola);
         DrickaSub orange = new DrickaSub("Orange");
@@ -41,34 +41,31 @@ public class Utrymme {
     } //funktion som skapar alla objekt
 
     public static void loadCSV() {
-        try (BufferedReader br = new BufferedReader(new FileReader("varoFyllnadsform.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Refill_VM.csv"))) {
             String line;
-            while ((line = br.readLine()) != null) { //while sats som kolla så att det finns något att läsa
-                String[] parts = line.split(","); //splittar upp raden i delar
-                if (parts.length == 2) { //om det finns två delar (två columner)
-                    String Sort = parts[0].trim(); //tar bort mellanslag
-                    int NyAntal;
+            while ((line = br.readLine()) != null) {
+                String[] kolum = line.split(";");
+                for (int i = 0; i < kolum.length; i += 2) {
+                    String sort = kolum[i].trim();
+                    int nyAntal;
                     try {
-                        NyAntal = Integer.parseInt(parts[1].trim()); //parsar stringen till en int och sen tar bort mellanslag
+                        nyAntal = Integer.parseInt(kolum[i + 1].trim()); //vara(i); antal(i+1)
                     } catch (NumberFormatException e) {
-                        System.err.println("Ogiligt antal för objekt: " + Sort);
-                        continue;
+                        System.err.println("fel nummer: " + sort);
+                        continue; //fortsätter till nästa vara även om det inte funkade på den
                     }
 
                     for (AbsVaror vara : varor) {
-                        if (vara.getSort().equalsIgnoreCase(Sort)) {
-                            vara.antal = NyAntal; //Sätter antalet på objektet
-                            break;
+                        if (vara.getSort().equalsIgnoreCase(sort)) {
+                            vara.antal = nyAntal;
+                            break; //går ut ur for loopen om den hittar rätt sort
                         }
-                    }
-                } else {
-                    System.err.println("Fel csv format: " + line); //om det inte finns två columner
-                }
+                    } //if sats som hittar rätt sort baserat på csv filen
+                } //for loop som går igenom varje vara med typ.
             }
         } catch (IOException e) {
-            System.err.println("kunde inte läsa csv fil: " + e.getMessage());
+            System.err.println("Could not read CSV file: " + e.getMessage());
         }
-
     }
 
 
@@ -86,19 +83,17 @@ public class Utrymme {
         }
     }
 
-    public static boolean load() {
+    public static void load() {
         try {
             ObjectInputStream infil = new ObjectInputStream(new FileInputStream(new File("objekt.txt")));
 
             varor = (ArrayList<AbsVaror>) infil.readObject(); //sätter varor till det som finns i filen
             infil.close();
             System.out.println("laddar in objekt");
-            return true;
 
         } catch (Exception e) {
             System.out.println("Filen finns ej");
-            return false;
-
+            skapaObjekt(); //skapar objekt om filen inte finns
         }
     }
 
